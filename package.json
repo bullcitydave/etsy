@@ -1,0 +1,17 @@
+{
+  "name": "accordion",
+  "version": "0.0.1",
+  "description": "Dave Seidman - Durham, NC",
+  "author": {
+    "name": "Dave Seidman",
+    "email": "bullcitydave@gmail.com",
+    "url": "http://daveseidman.me"
+  },
+  "devDependencies": {
+    "gulp": "~3.6.2",
+    "gulp-csso": "~0.2.8",
+    "gulp-connect": "~2.0.5",
+    "gulp-rename": "~1.2.0",
+    "gulp-sass": "~0.4.1"
+  }
+}
