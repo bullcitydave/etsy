@@ -1,4 +1,4 @@
-accordion
+etsy
 =========
 
-Example of an accordion using CSS3 and jQuery
+Returning data from etsy
