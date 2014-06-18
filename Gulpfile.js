@@ -1,58 +1,55 @@
-"use strict";
+var gulp           = require('gulp'),
+    csso           = require('gulp-csso'),
+    sass           = require('gulp-sass'),
+    rename         = require("gulp-rename"),
+    connect        = require("gulp-connect");
 
-var gulp = require("gulp"),
-	fs = require("fs"),
-	cp = require("child_process"),
-	jshint = require("gulp-jshint");
-
-// JSHint
-// https://github.com/wearefractal/gulp-jshint
-gulp.task("jshint", function () {
-
-	//
-	// FIXME
-	//
-	// gulp.jshint not reading .jshintrc
-	// side-effect of JSHint itself not read configuration when using stdin
-	//
-	// https://github.com/wearefractal/gulp-jshint/issues/4
-	//
-
-	var options = JSON.parse(fs.readFileSync(".jshintrc", "utf8"));
-
-	//
-	// FIXME
-	//
-	// Can't use following due to Error: EMFILE, too many open files:
-	//
-	//	gulp.src("./**/*.js")
-	//		.pipe(ignore({
-	//			pattern: [
-	//				"./node_modules/**",
-	//				"./test/temp/**"]}))
-	//
-	// Must wait for core impl of .src() ignores
-	//
-	// https://github.com/wearefractal/gulp/issues/35
-	//
-
-	gulp.src("./*.js")
-		.pipe(jshint(options))
-		.pipe(jshint.reporter("default"));
-
-	gulp.src("./test/**/*.js")
-		.pipe(jshint(options))
-		.pipe(jshint.reporter("default"));
+// // Styles
+gulp.task('css', function() {
+  return gulp.src('src/css/*.scss')
+    .pipe(
+      sass( {
+        includePaths: ['src/css'],
+        errLogToConsole: true
+      } ) )
+    .pipe(csso())
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest('./css/'));
 });
 
-// default task
-gulp.task("default", function () {
-	gulp.run("jshint");
-
-	gulp.watch(["index.js", "./test/**"], function () {
-		gulp.run("jshint");
-		cp.fork("node_modules/.bin/mocha");
-	});
-
+// // Images
+gulp.task('images', function() {
+  return gulp.src('src/images/**/*')
+    .pipe(gulp.dest('./images/'));
 });
 
+// // Templates
+gulp.task('templates', function() {
+  return gulp.src('src/**/*.html')
+    .pipe(gulp.dest('./'));
+});
+//
+// // Build
+gulp.task('build', ['images','css','templates']);
+
+// Connect - let's get this party started!
+gulp.task('connect', function() {
+  connect.server({
+    root: 'dist',
+    port: 9000
+  });
+});
+//
+// // Watch
+// gulp.task('watch', function() {
+//     // gulp.watch('src/css/*.css', ['styles']);
+//     gulp.watch('src/css/*.*scss', ['css']);
+//     // gulp.watch('src/css/*.css', ['styles']);
+//     gulp.watch('src/images/**/*', ['images']);
+//     gulp.watch('src/**/*.html', ['templates']);
+// });
+//
+// // Default task
+// gulp.task('default', function() {
+//     gulp.start('build', 'connect', 'watch');
+// });
