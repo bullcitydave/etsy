@@ -2,14 +2,14 @@ var gulp           = require('gulp'),
     connect        = require('gulp-connect'),
     csso           = require('gulp-csso'),
     sass           = require('gulp-sass'),
-    rename         = require("gulp-rename"),
-    deploy         = require("gulp-gh-pages");
+    rename         = require("gulp-rename");
+    // deploy         = require("gulp-gh-pages");
 
 // Styles.
 gulp.task('styles', function() {
   return gulp.src('src/styles/*.scss')
-    .pipe( 
-      sass( { 
+    .pipe(
+      sass( {
         includePaths: ['src/styles'],
         errLogToConsole: true
       }))
@@ -23,6 +23,13 @@ gulp.task('styles', function() {
 gulp.task('images', function() {
   return gulp.src('src/images/**/*')
     .pipe(gulp.dest('dist/images/'))
+    .pipe(connect.reload());
+});
+
+// Data
+gulp.task('data', function() {
+  return gulp.src('src/data/**/*')
+    .pipe(gulp.dest('dist/data/'))
     .pipe(connect.reload());
 });
 
@@ -58,7 +65,7 @@ gulp.task('default', function() {
 });
 
 // Deploy to gh-pages
-gulp.task('deploy', function() {
-  gulp.src("./dist/**/*")
-    .pipe(deploy('<enter your repo git url here>', 'origin'));
-});
+// gulp.task('deploy', function() {
+//   gulp.src("./dist/**/*")
+//     .pipe(deploy('<enter your repo git url here>', 'origin'));
+// });
