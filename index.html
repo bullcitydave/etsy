@@ -9,12 +9,25 @@
   </head>
 
 
+<body>
+<p id="returnMessage"></p>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.js"></script>
+<section id = "item-results">
+  <div class="item-box">
+    <img class="item-pic" src="http://placekitten.com/g/214/170">
+    <div class="item-title">Look at this kitty and you will have a wonderful day</div>
+    <div class="item-seller">juelman</div>
+    <div class="item-price">$3.00 USD</div>
+  </div>
+</section>
+<section id = "item-output">
+</section>
 
-
+</body>
 
 <script>
 
+var itemsToDisplay = 27;
 
 var items =
 {
@@ -3520,10 +3533,8 @@ var items =
 
 
 
- items.results.forEach(function(item) {
-   console.log(item.Images[0].url_170x135);
-  }
-   );
+
+
 
 
 
@@ -3535,22 +3546,30 @@ var items =
 //   });
 // // });
 
+// console.log(items.count);
+// $('#item-count').html(items.count);
+
+var x = 0;
+
+items.results.forEach(function(item) {
+       $('#item-output').append('<img class="item-pic" src= "' + item.Images[0].url_570xN + '">');
+
+
+      // console.log(item.Images[0].url_570xN);
+       // console.log('<img src= "' + item.Images[0].url_570xN + '">');
+  });
+
+console.log(items.count);
+$('#returnMessage').append("Displaying " + itemsToDisplay + " of " + items.count + " items returned.");
 
 </script>
 
 
-<body>
-  <section id = "item-results">
-    <div class="item-box">
-      <img class="item-pic" src="http://placekitten.com/g/214/170">
-      <p class="item-title">Look at this kitty</p>
-    </div>
-</body>
+
+
+
+
 
 
 
 </html>
-
-<script >
-$("#plushes").append("Test");
-</script>
