@@ -6,6 +6,10 @@ body {
   font-family:"Play",Helvetica,Arial,sans-serif;
 }
 
+div {
+  margin: 0;
+}
+
 div.item-box {
   background-color: #ffffff;
   // @include size(224px 220px); // Bourbon not getting used?
@@ -13,16 +17,33 @@ div.item-box {
   width: 224px;
   height: 220px;
   margin: 18px 14px 0 14px;
-}
 
-img.item-pic {
-  width: 214px;
-  height: 170px;
-  padding: 4px;
-}
+  img.item-pic {
+    width: 214px;
+    height: 170px;
+    padding: 4px;
+  }
 
-p.item-title {
-  font-size: 12px;
-  padding: 0 4px 0 4px;
-  margin: 0;
+  /* need overflow prop for title
+  +truncate(160); // this is a sass mixin - is it supposed to work? */
+
+  div.item-title, div.item-seller {
+    font-size: 12px;
+    padding: 0 4px 0 4px;
+    text-overflow: ellipsis;
+    width: 218px;
+    margin: 0;
+  }
+
+  div.item-seller {
+    float:left;
+    width: 80px;
+    color: gray;
+  }
+
+  div.item-price {
+    float: right;
+    color: blue;
+    width: 125px;
+  }
 }
