@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./styles/main.min.css">
-
-    <!-- // <script type="text/javascript" src="js/etsy.js"></script> -->
-    <title>Etsy</title>
-  </head>
-
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.js"></script>
-
-
-
-<script>
-
-
-var items =
 {
    "count":158,
    "results":[
@@ -3513,44 +3494,4 @@ var items =
       "effective_page":1,
       "next_page":2
    }
-};
-
-
-
-
-
-
- items.results.forEach(function(item) {
-   console.log(item.Images[0].url_170x135);
-  }
-   );
-
-
-
-//   items.results.forEach(function(pictures){
-//     pictures.Images.forEach(function(pic){
-//       // $('#plushes').append('<img src= "' + pic.url_75x75 +  '">'));
-//       $('#plushes').append('blah')
-//     });
-//   });
-// // });
-
-
-</script>
-
-
-<body>
-  <section id = "item-results">
-    <div class="item-box">
-      <img class="item-pic" src="http://placekitten.com/g/214/170">
-      <p class="item-title">Look at this kitty</p>
-    </div>
-</body>
-
-
-
-</html>
-
-<script >
-$("#plushes").append("Test");
-</script>
+}

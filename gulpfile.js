@@ -3,7 +3,7 @@ var gulp           = require('gulp'),
     csso           = require('gulp-csso'),
     sass           = require('gulp-sass'),
     rename         = require("gulp-rename");
-    // deploy         = require("gulp-gh-pages");
+    deploy         = require("gulp-gh-pages");
 
 // Styles.
 gulp.task('styles', function() {
@@ -14,8 +14,8 @@ gulp.task('styles', function() {
         errLogToConsole: true
       }))
     .pipe(csso())
-    .pipe(rename('styles/main.min.css'))
-    .pipe(gulp.dest('./dist'))
+    .pipe(rename('main.min.css'))
+    .pipe(gulp.dest('dist/styles'))
     .pipe(connect.reload());
 });
 
@@ -23,6 +23,13 @@ gulp.task('styles', function() {
 gulp.task('images', function() {
   return gulp.src('src/images/**/*')
     .pipe(gulp.dest('dist/images/'))
+    .pipe(connect.reload());
+});
+
+// Javascript
+gulp.task('js', function() {
+  return gulp.src('src/js/**/*')
+    .pipe(gulp.dest('dist/js/'))
     .pipe(connect.reload());
 });
 
@@ -41,7 +48,7 @@ gulp.task('templates', function() {
 });
 
 // Build
-gulp.task('build', ['images','styles','templates']);
+gulp.task('build', ['images','styles','templates', 'js', 'data']);
 
 // Connect - let's get this party started!
 gulp.task('connect', function() {
@@ -54,9 +61,10 @@ gulp.task('connect', function() {
 
 // Watch
 gulp.task('watch', function() {
-    gulp.watch('src/styles/**/*.css', ['styles']);
+    gulp.watch('src/styles/**/*.scss', ['styles']);
     gulp.watch('src/images/**/*', ['images']);
     gulp.watch('src/**/*.html', ['templates']);
+    gulp.watch('src/js/**/*.js', ['js']);
 });
 
 // Default task
@@ -65,7 +73,7 @@ gulp.task('default', function() {
 });
 
 // Deploy to gh-pages
-// gulp.task('deploy', function() {
-//   gulp.src("./dist/**/*")
-//     .pipe(deploy('<enter your repo git url here>', 'origin'));
-// });
+gulp.task('deploy', function() {
+  gulp.src("./dist/**/*")
+    .pipe(deploy('git@github.com:bullcitydave/etsy.git', 'origin'));
+});
