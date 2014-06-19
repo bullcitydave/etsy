@@ -12,6 +12,7 @@
 <body>
 <p id="returnMessage"></p>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.js"></script>
+<!-- <script src="js/jquery.min.js"></script>  getting error when trying to us-->
 <section id = "item-results">
   <div class="item-box">
     <img class="item-pic" src="http://placekitten.com/g/214/170">
@@ -3549,13 +3550,19 @@ var items =
 // console.log(items.count);
 // $('#item-count').html(items.count);
 
-var x = 0;
+// var x=0;
 
 items.results.forEach(function(item) {
-       $('#item-output').append('<img class="item-pic" src= "' + item.Images[0].url_570xN + '">');
-
+      //  line below results in unwanted closing di
+      //  $('#item-output').append("<div class='item-box'>");
+      //  $('#item-output').append('<img class="item-pic" src= "' + item.Images[0].url_570xN + '">');
+      //  $('#item-output').append('<div class="item-title"'> + item.title + '</div>');
+      //  $('#item-output').append('</div>');
+      //  $('#item-output').append('</div>');
+      $('#item-output').append('<div class="item-box"><img class="item-pic" src= "' + item.Images[0].url_570xN + '"><div class="item-title">' + item.title + '</div><div class="item-seller">user' + item.user_id + '</div><div class="item-price">' + item.price +'</div></div>');
 
       // console.log(item.Images[0].url_570xN);
+      console.log($('#item-output'));
        // console.log('<img src= "' + item.Images[0].url_570xN + '">');
   });
 
@@ -3565,8 +3572,13 @@ $('#returnMessage').append("Displaying " + itemsToDisplay + " of " + items.count
 </script>
 
 
-
-
+<!--
+// <div class="item-box">
+//   <img class="item-pic" src="http://placekitten.com/g/214/170">
+//   <div class="item-title">Look at this kitty and you will have a wonderful day</div>
+//   <div class="item-seller">juelman</div>
+//   <div class="item-price">$3.00 USD</div>
+// </div> -->
 
 
 
